@@ -1,0 +1,75 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="buscarUsuario(input.value)" type="text" class="form-control" placeholder="Buscar">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warnign text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Un momento por favor</span>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="card-title"> Usuarios registrados (<small>{{totalRegistros}}</small>)</h3>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <button (click)="crearUsuario()" class="btn btn-primary">
+                            <i class="fa fa-plus"> Crear Usuario</i>
+                        </button>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <th style="text-align: center;">ID</th>
+                        <th style="text-align: center;">Nombre</th>
+                        <th style="text-align: center;">Rol</th>
+                        <th style="text-align: center;">Estado</th>
+                        <th style="text-align: center;">Opciones</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <td style="text-align: center;">{{usuario.id}}</td>
+                            <td style="text-align: center;">
+                                {{usuario.nombre}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{usuario.rol.nombre}}
+                            </td>
+                            <td style="text-align: center;">
+                                <label *ngIf="usuario.activo" class="label label-info">Activo</label>
+                                <label *ngIf="!usuario.activo" class="label label-danger">Inactivo</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <button (click)="actualizarUsuario(usuario.id)" class="btn btn-primary" style="margin-right: 2px;">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+
+                                <button (click)="eliminarUsuario(usuario)" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="atrasPagina()" class="btn btn-secondary" style="margin-right: 5px;">Anteriores</button>
+                <button (click)="adelantarPagina()" class="btn btn-secondary">Siguientes</button>
+            </div>
+        </div>
+    </div>
+</div>
