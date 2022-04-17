@@ -28,6 +28,9 @@ export class AdminUsuarioComponent implements OnInit {
     this.usuarioForm = this.form.group({
       id: [{value: '', disabled: true},  ],
       nombre: ['', Validators.required],
+      cedula: ['', Validators.required],
+      email: ['', Validators.required],
+      telefono: ['', Validators.required],
       rol: ['', Validators.required ],
       activo: [ true , Validators.required ],
     });
@@ -93,6 +96,9 @@ export class AdminUsuarioComponent implements OnInit {
   public guardarUsuario() {
     const usuario = {
       nombre: this.usuarioForm.value.nombre,
+      cedula: this.usuarioForm.value.cedula,
+      email: this.usuarioForm.value.email,
+      telefono: this.usuarioForm.value.telefono,
       rol: {id: this.usuarioForm.value.rol},
       activo: this.usuarioForm.value.activo,
     }
@@ -101,6 +107,9 @@ export class AdminUsuarioComponent implements OnInit {
         this.usuarioForm.setValue({
           id: resp.id,
           nombre: resp.nombre,
+          cedula: resp.cedula,
+          email: resp.email,
+          telefono: resp.telefono,
           rol: resp.rol.id,
           activo: resp.activo,
         });
